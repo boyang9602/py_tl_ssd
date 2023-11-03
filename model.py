@@ -196,7 +196,6 @@ class DetectionOutput(Module):
         prior_center_ys = (self.prior_boxes[:, 1] + self.prior_boxes[:, 3]) / 2
         prior_widths = self.prior_boxes[:, 2] - self.prior_boxes[:, 0]
         prior_heights = self.prior_boxes[:, 3] - self.prior_boxes[:, 1]
-        print(self.variances.shape, locs.shape, prior_widths.shape, prior_heights.shape)
         decode_bbox_center_xs = self.variances[:, 0] * locs[:, :, 0] * prior_widths + prior_center_xs
         decode_bbox_center_ys = self.variances[:, 1] * locs[:, :, 1] * prior_heights + prior_center_ys
         decode_bbox_widths = torch.exp(self.variances[:, 2] * locs[:, :, 2]) * prior_widths
